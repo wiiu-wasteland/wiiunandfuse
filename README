@@ -1,0 +1,40 @@
+wiiunandfuse v1.0 by rw-r-r-0644 (based on wiinandfuse v1.1 by yellowstar6)
+Mount WiiU SLC/SLCCMPT NAND images with FUSE. wiinandfuse supports raw NAND dumps with ECC.
+wiiunandfuse uses the MIT license.
+wiiunandfuse output when run without params:
+
+Usage:
+wiiunandfuse <nand.bin> <otp.bin> <mount point> <options>
+Options:
+-p: Use NAND permissions. UID and GUI of objects will be set to the NAND UID/GID, as well as the permissions. This option only enables setting the UID/GID and permissions in stat, the open and readdir functions don't check permissions.
+-v: Abort/EIO if HMAC verification of ISFS or file data fails. If ISFS verification fails, wiinandfuse aborts and NAND isn't mounted. If file data verification fails, read will return EIO.
+-e: Ignore ECC errors, default is disabled. When disabled, when pages have invalid ECC reads return EIO.
+
+Supported FUSE fs functions:
+statfs(statvfs)
+getattr(stat)
+readdir
+open
+release
+read
+rename
+chown
+chmod
+unlink
+rmdir
+mknod
+mkdir
+truncate
+
+Changelog:
+v1.0:
+Initial release.
+
+Credits:
+yellowstar6 for wiinandfuse
+Bootmii MINI and ppcskel for nandfs structures and functions from nandfs.c and nand.c nand_correct function
+Mike Scott for his rijndeal.c
+Segher for zestig, for SFFS node permissions format, and tools.c
+fs_hmac.c by gray and bushing
+Steve Reid's sha1.c
+
